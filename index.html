@@ -1,373 +1,814 @@
-<!DOCTYPE html> 
-<!--si, il sito web è fatto con ai, non ho tempo di svilupparlo, sto pensando alla versione definitiva :)-->
+<!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Synapsehub.eu - contdown</title>
+    <title>SynapseHub.eu - home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+        :root {
+            --primary-dark: #1a1a2e;
+            --primary-blue: #16213e;
+            --accent-teal: #0f8b8d;
+            --accent-purple: #6a4c93;
+            --online-green: #2ecc71;
+            --offline-red: #e74c3c;
+            --light-bg: #f8f9fa;
+            --text-dark: #2d3047;
+            --text-light: #6c757d;
+            --white: #ffffff;
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s ease;
+        }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #000000 0%, #1a0033 100%);
-            color: #ffffff;
-            font-family: 'Roboto', sans-serif;
-            min-height: 100vh;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
             overflow-x: hidden;
         }
         
-        .container {
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 0 2rem;
         }
         
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-            position: relative;
-        }
-        
-        h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 4rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 1rem;
-            color: #8a2be2;
-            text-shadow: 0 0 15px rgba(138, 43, 226, 0.7);
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { text-shadow: 0 0 15px rgba(138, 43, 226, 0.7); }
-            50% { text-shadow: 0 0 25px rgba(138, 43, 226, 1), 0 0 35px rgba(138, 43, 226, 0.5); }
-            100% { text-shadow: 0 0 15px rgba(138, 43, 226, 0.7); }
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: #b19cd9;
-            margin-bottom: 2rem;
-        }
-        
-        .countdown-container {
+        .logo {
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 3rem 0;
-            perspective: 1000px;
-        }
-        
-        .countdown-box {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid #8a2be2;
-            border-radius: 10px;
-            padding: 1.5rem;
-            width: 140px;
-            text-align: center;
-            transform-style: preserve-3d;
-            transition: transform 0.3s;
-            box-shadow: 0 0 15px rgba(138, 43, 226, 0.5);
-        }
-        
-        .countdown-box:hover {
-            transform: translateZ(20px);
-        }
-        
-        .countdown-value {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3.5rem;
+            align-items: center;
+            font-size: 1.8rem;
             font-weight: 700;
-            color: #ffffff;
-            text-shadow: 0 0 10px rgba(138, 43, 226, 0.8);
+            color: var(--primary-dark);
         }
         
-        .countdown-label {
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-top: 0.5rem;
-            color: #b19cd9;
+        .logo-icon {
+            margin-right: 10px;
+            color: var(--accent-teal);
+            font-size: 2rem;
         }
         
-        .cloud-elements {
+        nav ul {
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 4rem 0;
+            list-style: none;
         }
         
-        .cloud-icon {
-            text-align: center;
-            margin: 1rem;
+        nav li {
+            margin-left: 2rem;
+        }
+        
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 0;
             position: relative;
-            transform-style: preserve-3d;
-            animation: float 5s infinite ease-in-out;
         }
         
-        .cloud-icon:nth-child(2) {
-            animation-delay: 1s;
+        nav a:hover {
+            color: var(--accent-teal);
         }
         
-        .cloud-icon:nth-child(3) {
-            animation-delay: 2s;
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--accent-teal);
+            transition: width 0.3s ease;
         }
         
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotateY(0); }
-            50% { transform: translateY(-20px) rotateY(10deg); }
+        nav a:hover::after {
+            width: 100%;
         }
         
-        .icon {
-            font-size: 3rem;
-            color: #8a2be2;
-            margin-bottom: 0.5rem;
-            filter: drop-shadow(0 0 8px rgba(138, 43, 226, 0.7));
-        }
-        
-        .security-elements {
+    
+        .hero {
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 3rem 0;
+            align-items: center;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #eef2f6 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
         }
         
-        .shield {
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            color: var(--primary-dark);
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-teal) 0%, var(--accent-purple) 100%);
+            color: var(--white);
+            padding: 0.9rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(15, 139, 141, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(15, 139, 141, 0.4);
+        }
+        
+        .hero-visual {
             position: relative;
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(45deg, #000000, #2d004d);
-            border-radius: 50%;
+            height: 400px;
+        }
+        
+        .floating-icons {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .floating-icon {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: var(--white);
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transform-style: preserve-3d;
-            animation: rotate 10s infinite linear;
-            box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
+            box-shadow: var(--card-shadow);
+            font-size: 1.8rem;
+            color: var(--accent-teal);
+            animation: float 6s ease-in-out infinite;
         }
         
-        @keyframes rotate {
-            0% { transform: rotateY(0); }
-            100% { transform: rotateY(360deg); }
+        .floating-icon:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
         }
         
-        .shield:before {
+        .floating-icon:nth-child(2) {
+            top: 60%;
+            left: 20%;
+            animation-delay: 1s;
+            color: var(--accent-purple);
+        }
+        
+        .floating-icon:nth-child(3) {
+            top: 30%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+        
+        .floating-icon:nth-child(4) {
+            bottom: 20%;
+            right: 25%;
+            animation-delay: 3s;
+            color: var(--accent-purple);
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            position: relative;
+        }
+        
+        .section-title::after {
             content: '';
             position: absolute;
-            width: 60px;
-            height: 60px;
-            border: 3px solid #8a2be2;
-            border-radius: 50%;
-            box-shadow: 0 0 15px rgba(138, 43, 226, 0.8);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-teal) 0%, var(--accent-purple) 100%);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
         }
         
-        .shield:after {
-            content: '🔒';
-            font-size: 2rem;
-            filter: drop-shadow(0 0 5px rgba(138, 43, 226, 0.8));
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
         }
         
-        canvas {
-            position: fixed;
+        .service-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            z-index: -1;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent-teal) 0%, var(--accent-purple) 100%);
         }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-teal);
+        }
+        
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+            font-size: 1.5rem;
+        }
+        
+        .service-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        .proxy-map-section {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark) 100%);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            margin-top: 4rem;
+            color: var(--white);
+        }
+        
+        .proxy-map-section .section-title {
+            color: var(--white);
+        }
+        
+        .proxy-map-section .section-title::after {
+            background: linear-gradient(90deg, var(--accent-teal) 0%, #a8e6cf 100%);
+        }
+        
+        .proxy-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+            color: #e0e0e0;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        
+        .proxy-map-container {
+            position: relative;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+        
+        .proxy-path {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .connection-line {
+            position: absolute;
+            height: 3px;
+            background: var(--accent-teal);
+            z-index: 1;
+            transform-origin: left center;
+            opacity: 0.7;
+        }
+        
+        .map-node {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: #000000;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+            border: 3px solid var(--accent-teal);
+        }
+        
+        .map-node:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(15, 139, 141, 0.5);
+            border-color: #a8e6cf;
+        }
+        
+        .node-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--white);
+        }
+        
+        .node-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .node-info {
+            position: absolute;
+            background: var(--white);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            width: 300px;
+            z-index: 20;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            color: var(--text-dark);
+        }
+        
+        .node-info.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .node-info h3 {
+            color: var(--accent-teal);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .node-info p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: var(--text-light);
+        }
+        
+        .node-info .close-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
         
         footer {
-            text-align: center;
+            background: var(--primary-dark);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
             margin-top: 4rem;
-            color: #b19cd9;
-            font-size: 0.9rem;
         }
         
-        @media (max-width: 768px) {
-            h1 {
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            color: var(--accent-teal);
+        }
+        
+        .footer-section p, .footer-section li {
+            color: #b0b0b0;
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent-teal);
+        }
+        
+        .contact-link {
+            color: #b0b0b0;
+            text-decoration: none;
+            transition: var(--transition);
+            display: inline-block;
+        }
+        
+        .contact-link:hover {
+            color: var(--accent-teal);
+            transform: translateX(5px);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background: var(--accent-teal);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #b0b0b0;
+        }
+        
+        @media (max-width: 968px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+            
+            .hero-text h1 {
                 font-size: 2.5rem;
             }
             
-            .countdown-box {
-                width: 70px;
-                padding: 1rem 0.5rem;
+            .proxy-map-container {
+                height: 500px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
             }
             
-            .countdown-value {
-                font-size: 2rem;
+            nav ul {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
             }
             
-            .countdown-label {
-                font-size: 0.7rem;
+            nav li {
+                margin: 0.5rem 1rem;
+            }
+            
+            section {
+                padding: 4rem 1.5rem;
+            }
+            
+            .proxy-map-container {
+                height: 400px;
+            }
+            
+            .map-node {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .node-icon {
+                font-size: 1.5rem;
+            }
+            
+            .node-label {
+                font-size: 0.8rem;
+            }
+            
+            .node-info {
+                width: 250px;
             }
         }
     </style>
 </head>
 <body>
-    <canvas id="particleCanvas"></canvas>
-    
-    <div class="container">
-        <header>
-            <h1>Synapse</h1>
-            <p class="subtitle">Connettiamo le tue idee alla realtà - Hosting Cloud Sicuro ad Alte Prestazioni</p>
-        </header>
-        
-        <div class="countdown-container">
-            <div class="countdown-box">
-                <div class="countdown-value" id="days">00</div>
-                <div class="countdown-label">Giorni</div>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="logo-icon fas fa-brain"></i> SynapseHub
             </div>
-            <div class="countdown-box">
-                <div class="countdown-value" id="hours">00</div>
-                <div class="countdown-label">Ore</div>
-            </div>
-            <div class="countdown-box">
-                <div class="countdown-value" id="minutes">00</div>
-                <div class="countdown-label">Minuti</div>
-            </div>
-            <div class="countdown-box">
-                <div class="countdown-value" id="seconds">00</div>
-                <div class="countdown-label">Secondi</div>
-            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Servizi</a></li>
+                    <li><a href="#proxy-map">Come Funziona</a></li>
+                    <li><a href="#contact">Contatti</a></li>
+                </ul>
+            </nav>
         </div>
-        
-        <div class="cloud-elements">
-            <div class="cloud-icon">
-                <div class="icon">☁️</div>
-                <div>Cloud Hosting</div>
-            </div>
-            <div class="cloud-icon">
-                <div class="icon">🚀</div>
-                <div>Alta Velocità</div>
-            </div>
-            <div class="cloud-icon">
-                <div class="icon">🔧</div>
-                <div>Facile da utilizzare</div>
-            </div>
-        </div>
-        
+    </header>
 
-        
-        <footer>
-            <p>© 2025 Synapse - Tutti i diritti riservati</p>
-        </footer>
-    </div>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Servizi Digitali Sicuri e Avanzati</h1>
+                <p>SynapseHub offre una suite completa di strumenti per la privacy, sicurezza e produttività. Email anonime, proxy sicuri e soluzioni SaaS personalizzate.</p>
+                <a href="#proxy-map" class="cta-button">Scopri Come Funziona</a>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-icons">
+                    <div class="floating-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="floating-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="floating-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="floating-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title">I Nostri Servizi</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>SecMail</h3>
+                <p>Email NON TEMPORANEE e sicure senza registrazione. Completamente anonime protette e cittografate.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-user-secret"></i>
+                </div>
+                <h3>WebProxy Tor</h3>
+                <p>Navigazione anonima attraverso la rete Tor. Maschera il tuo IP e protegge la tua identità online.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <h3>SaaS Personalizzati</h3>
+                <p>Soluzioni software su misura per le tue esigenze aziendali. Sviluppiamo esattamente ciò che ti serve.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">
+                    <i class="fas fa-fingerprint"></i>
+                </div>
+                <h3>Niente logs, niente tracker o coockies</h3>
+                <p>La privacy è ciò che conta</p>
+            </div>
+        </div>
+    </section>
+
+
+
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SynapseHub</h3>
+                <p>La piattaforma all-in-one per servizi digitali avanzati, sicurezza e privacy.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-telegram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Servizi</h3>
+                <ul>
+                    <li><a href="https://secmail.synapsehub.eu">SecMail</a></li>
+                    <li><a href="https://offline.synapsehub.eu">WebProxy Tor</a></li>
+                    <li><a href="https://dash.synapsehub.eu">SaaS Personalizzato</a></li>
+                    <li><a href="https://dash.synapsehub.eu">Servizi di sicurezza</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contatti</h3>
+                <ul>
+                    <li>
+                        <a href="mailto:info@synapsehub.eu" class="contact-link">
+                            <i class="fas fa-envelope"></i> supporto@synapsehub.eu
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tel:+390123456789" class="contact-link">
+                            <i class="fas fa-phone"></i> +39 **********
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 SynapseHub. Tutti i diritti riservati. Dominio: synapsehub.eu</p>
+        </div>
+    </footer>
 
     <script>
-        // Configurazione del countdown
-        const countdownDate = new Date('October 15, 2025 00:00:00').getTime();
-        
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = countdownDate - now;
-            
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days.toString().padStart(2, '0');
-            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                document.getElementById('days').textContent = '00';
-                document.getElementById('hours').textContent = '00';
-                document.getElementById('minutes').textContent = '00';
-                document.getElementById('seconds').textContent = '00';
+        // Dati per le informazioni dei nodi
+        const nodeData = {
+            user: {
+                title: "Il Tuo Dispositivo",
+                description: "La connessione inizia dal tuo dispositivo. Il nostro client SynapseHub cripta immediatamente i tuoi dati prima che lascino il tuo dispositivo, garantendo che nessuno possa intercettare le tue informazioni."
+            },
+            entry: {
+                title: "Nodo di Ingresso",
+                description: "Il primo server nella catena proxy. Riceve la tua connessione criptata e rimuove qualsiasi informazione identificativa. Questo nodo conosce il tuo IP ma non sa cosa stai richiedendo."
+            },
+            middle: {
+                title: "Nodo Intermedio",
+                description: "Uno o più server che ritrasmettono la tua richiesta. Questi nodi non conoscono né la tua identità né la destinazione finale, agendo come anelli anonimi nella catena."
+            },
+            exit: {
+                title: "Nodo di Uscita",
+                description: "L'ultimo server prima della destinazione finale. Decripta i dati (se necessario) e inoltra la richiesta al sito web. Questo nodo conosce la destinazione ma non la tua identità."
+            },
+            destination: {
+                title: "Sito Web di Destinazione",
+                description: "Il server finale che riceve la tua richiesta. Vedrà solo l'IP del nodo di uscita, non il tuo IP reale. Le risposte percorrono lo stesso percorso al contrario per raggiungerti in sicurezza."
             }
+        };
+
+        function createConnections() {
+            const proxyPath = document.getElementById('proxyPath');
+            
+            const nodes = {
+                user: { x: 10, y: 50 },
+                entry: { x: 30, y: 20 },
+                middle: { x: 50, y: 50 },
+                exit: { x: 70, y: 80 },
+                destination: { x: 90, y: 50 }
+            };
+            
+            createLine(nodes.user, nodes.entry, proxyPath);
+            createLine(nodes.entry, nodes.middle, proxyPath);
+            createLine(nodes.middle, nodes.exit, proxyPath);
+            createLine(nodes.exit, nodes.destination, proxyPath);
         }
         
-        const countdownInterval = setInterval(updateCountdown, 1000);
-        updateCountdown();
-        
-        // Configurazione del canvas con particelle
-        const canvas = document.getElementById('particleCanvas');
-        const ctx = canvas.getContext('2d');
-        
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        
-        const particles = [];
-        const particleCount = 100;
-        
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = Math.random() * 1 - 0.5;
-                this.speedY = Math.random() * 1 - 0.5;
-                this.color = `hsl(${Math.random() * 60 + 260}, 100%, 70%)`;
-            }
+        function createLine(start, end, container) {
+            const line = document.createElement('div');
+            line.className = 'connection-line';
             
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                
-                if (this.x > canvas.width || this.x < 0) {
-                    this.speedX = -this.speedX;
-                }
-                if (this.y > canvas.height || this.y < 0) {
-                    this.speedY = -this.speedY;
-                }
-            }
+            const dx = end.x - start.x;
+            const dy = end.y - start.y;
+            const length = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
             
-            draw() {
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
+            
+            line.style.width = length + '%';
+            line.style.left = start.x + '%';
+            line.style.top = start.y + '%';
+            line.style.transform = `rotate(${angle}deg)`;
+            
+            container.appendChild(line);
         }
+
         
-        function createParticles() {
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-        
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        function setupNodeInteractions() {
+            const nodes = document.querySelectorAll('.map-node');
+            const nodeInfo = document.getElementById('nodeInfo');
+            const infoTitle = document.getElementById('infoTitle');
+            const infoDescription = document.getElementById('infoDescription');
+            const closeButton = document.querySelector('.close-info');
             
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
-                
-                for (let j = i; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
+            nodes.forEach(node => {
+                node.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const nodeType = this.getAttribute('data-node');
+                    const data = nodeData[nodeType];
                     
-                    if (distance < 100) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(138, 43, 226, ${1 - distance/100})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
+                    
+                    infoTitle.textContent = data.title;
+                    infoDescription.textContent = data.description;
+                    
+                    const rect = this.getBoundingClientRect();
+                    const containerRect = document.querySelector('.proxy-map-container').getBoundingClientRect();
+                    
+                    let top = rect.top - containerRect.top + rect.height/2;
+                    let left = rect.left - containerRect.left + rect.width + 20;
+                    
+                    if (rect.left + 320 > containerRect.right) {
+                        left = rect.left - containerRect.left - 320;
                     }
-                }
-            }
+                    
+                    if (rect.bottom + 150 > containerRect.bottom) {
+                        top = rect.top - containerRect.top - 150;
+                    }
+                    
+                    nodeInfo.style.top = top + 'px';
+                    nodeInfo.style.left = left + 'px';
+                    
+                    nodeInfo.classList.add('active');
+                });
+            });
             
-            requestAnimationFrame(animateParticles);
+            closeButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                nodeInfo.classList.remove('active');
+            });
+            
+            document.addEventListener('click', function() {
+                nodeInfo.classList.remove('active');
+            });
+            
+            nodeInfo.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
         }
-        
-        createParticles();
-        animateParticles();
-        
-        window.addEventListener('resize', function() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+
+        document.querySelectorAll('nav a, .cta-button').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        window.addEventListener('load', function() {
+            createConnections();
+            setupNodeInteractions();
         });
     </script>
 </body>
