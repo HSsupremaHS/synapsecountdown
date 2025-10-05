@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termini di Servizio - SynapseHub</title>
+    <style>
+        :root {
+            --primary-color: #4a6ee0;
+            --secondary-color: #6c757d;
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --border-color: #dee2e6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f7fa;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary-color), #3a5bc7);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .last-updated {
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            text-align: center;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .last-updated strong {
+            color: var(--primary-color);
+        }
+        
+        .tos-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+        }
+        
+        .tos-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tos-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .tos-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .tos-section h3 {
+            color: var(--dark-color);
+            margin: 1.5rem 0 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .tos-section p {
+            margin-bottom: 0.8rem;
+        }
+        
+        .tos-section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .tos-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .example-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .acceptance-section {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .checkbox-container {
+            display: flex;
+            align-items: flex-start;
+            margin: 1.5rem 0;
+            text-align: left;
+        }
+        
+        .checkbox-container input {
+            margin-right: 10px;
+            margin-top: 4px;
+        }
+        
+        .accept-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-weight: 600;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .accept-button:hover {
+            background-color: #3a5bc7;
+        }
+        
+        .accept-button:disabled {
+            background-color: var(--secondary-color);
+            cursor: not-allowed;
+        }
+        
+        .message {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .tos-container {
+                padding: 1.5rem;
+                max-height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Termini di Servizio</h1>
+            <p>SynapseHub - Servizi di creazione siti web</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="last-updated">
+            <p><strong>Ultimo aggiornamento:</strong> domenica, 5 ottobre 2025</p>
+            <p><strong>Effettivo da:</strong> domenica, 5 ottobre 2025</p>
+        </div>
+        
+        <div class="tos-container">
+            <div class="tos-section">
+                <h2>1. Accettazione dei Termini</h2>
+                <p>Accedendo o utilizzando i servizi di SynapseHub ("il Servizio"), l'utente ("Cliente") accetta di essere vincolato dai presenti Termini di Servizio ("ToS"). Il Servizio è fornito da SynapseHub tramite il sottodominio synapsehub.eu.</p>
+            </div>
+            
+            <div class="tos-section">
+                <h2>2. Descrizione del Servizio</h2>
+                <p>SynapseHub fornisce servizi di creazione di siti web con backend gratuito che includono:</p>
+                <ul>
+                    <li>Integrazioni con Stripe per i pagamenti</li>
+                    <li>Sistema di login Discord</li>
+                    <li>Bot Discord integrati</li>
+                    <li>Hosting su sottodominio synapsehub.eu</li>
+                </ul>
+            </div>
+            
+            <div class="tos-section">
+                <h2>3. Modello di Revenue Sharing</h2>
+                <ul>
+                    <li>SynapseHub trattiene il <strong>25% dei ricavi generati</strong> dal Cliente</li>
+                    <li>La percentuale è calcolata <strong>escludendo la commissione del 25% di Stripe</strong></li>
+                </ul>
+                <div class="example-box">
+                    <p><strong>Esempio:</strong> su un pagamento di €100, Stripe trattiene €25, SynapseHub riceve €18.75 (25% di €75), il Cliente riceve €56.25</p>
+                </div>
+            </div>
+            
+            <div class="tos-section">
+                <h2>4. Accesso Amministrativo</h2>
+                <p>SynapseHub si riserva il diritto di:</p>
+                <ul>
+                    <li>Avere accesso amministrativo completo a tutti i siti web creati</li>
+                    <li>Monitorare, modificare o interrompere qualsiasi funzionalità del sito</li>
+                    <li>Accedere ai dati e alle impostazioni del sito per scopi di manutenzione e sicurezza</li>
+                </ul>
+            </div>
+            
+            <div class="tos-section">
+                <h2>5. Politica di Riattivazione</h2>
+                <p>Se entro <strong>60 giorni dalla creazione del sito</strong> il Cliente non genera <strong>almeno €25 di ricavi</strong>:</p>
+                <ul>
+                    <li>Il sito verrà sospeso</li>
+                    <li>Per la riattivazione sarà richiesto un pagamento una tantum di <strong>€5</strong></li>
+                    <li>Il periodo di 60 giorni si riferisce a ricavi netti (al netto delle commissioni Stripe)</li>
+                </ul>
+            </div>
+            
+            <div class="tos-section">
+                <h2>6. Pagamenti e Stripe</h2>
+                <ul>
+                    <li>Tutti i pagamenti sono processati tramite Stripe</li>
+                    <li>Le transizioni passeranno attraverso l'account Stripe di SynapseHub</li>
+                    <li>SynapseHub non è responsabile per problemi relativi ai pagamenti o commissioni di Stripe</li>
+                </ul>
+            </div>
+            
+            <div class="tos-section">
+                <h2>7. Modifiche ai Termini</h2>
+                <p>SynapseHub si riserva il diritto di:</p>
+                <ul>
+                    <li>Modificare questi ToS in qualsiasi momento senza preavviso</li>
+                    <li>Implementare nuove politiche o modificare quelle esistenti</li>
+                    <li>Le modifiche diventeranno effettive immediatamente dopo la pubblicazione</li>
+                </ul>
+            </div>
+            
+            <div class="tos-section">
+                <h2>8. Terminazione del Servizio</h2>
+                <p>SynapseHub può terminare o sospendere il servizio:</p>
+                <ul>
+                    <li>In qualsiasi momento, a sua esclusiva discrezione</li>
+                    <li>Senza obbligo di preavviso</li>
+                    <li>Senza responsabilità verso il Cliente per eventuali danni</li>
+                    <li>In caso di violazione dei ToS o attività illecite</li>
+                </ul>
+            </div>
+            
+            <div class="tos-section">
+                <h2>9. Responsabilità del Cliente</h2>
+                <p>Il Cliente si impegna a:</p>
+                <ul>
+                    <li>Utilizzare il servizio in modo legale e conforme alle leggi applicabili</li>
+                    <li>Non impegnarsi in attività fraudolente o abusive</li>
+                    <li>Mantenere aggiornate le proprie informazioni di pagamento</li>
+                    <li>Accettare che SynapseHub non è responsabile per perdite di dati o interruzioni del servizio</li>
+                </ul>
+            </div>
+            
+            <div class="tos-section">
+                <h2>10. Limitazione di Responsabilità</h2>
+                <p>SynapseHub non sarà responsabile per:</p>
+                <ul>
+                    <li>Perdite di profitto, dati, o opportunità commerciali</li>
+                    <li>Interruzioni del servizio non intenzionali</li>
+                    <li>Problemi relativi a servizi di terze parti (Stripe, Discord, etc.)</li>
+                    <li>Danni indiretti, consequenziali o punitivi</li>
+                </ul>
+            </div>
+            
+            <div class="tos-section">
+                <h2>11. Legge Applicabile</h2>
+                <p>Questi ToS sono governati dalla legge italiana. Qualsiasi controversia sarà soggetta alla giurisdizione esclusiva dei tribunali italiani.</p>
+            </div>
+            
+            <div class="tos-section">
+                <h2>12. Contatto</h2>
+                <p>Per questioni relative a questi ToS, contattare: supporto@synapsehub.eu</p>
+            </div>
+            
+            <div class="tos-section">
+                <p><strong>Si consiglia di consultare un avvocato per adattare questi ToS alle specifiche esigenze giuridiche della vostra giurisdizione.</strong></p>
+            </div>
+        </div>
+        
+        <div class="acceptance-section">
+            <h2>Accettazione dei Termini di Servizio</h2>
+            <p>Per utilizzare i servizi di SynapseHub, è necessario accettare i Termini di Servizio sopra indicati.</p>
+            
+            <div class="checkbox-container">
+                <input type="checkbox" id="acceptTOS">
+                <label for="acceptTOS">Dichiaro di aver letto, compreso e accettato tutti i Termini di Servizio di SynapseHub. Acconsento espressamente alle condizioni relative al revenue sharing, all'accesso amministrativo, alla politica di riattivazione e alla possibilità di modifica o terminazione del servizio da parte di SynapseHub.</label>
+            </div>
+            
+            <button class="accept-button" id="acceptButton" disabled>Accetto i Termini di Servizio</button>
+            
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>SynapseHub &copy; 2025 - Tutti i diritti riservati</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const acceptCheckbox = document.getElementById('acceptTOS');
+            const acceptButton = document.getElementById('acceptButton');
+            const messageDiv = document.getElementById('message');
+            
+            // Verifica se l'utente ha già accettato i termini
+            checkTOSAccepted();
+            
+            // Abilita il pulsante quando la checkbox è selezionata
+            acceptCheckbox.addEventListener('change', function() {
+                acceptButton.disabled = !this.checked;
+            });
+            
+            // Gestisce il click sul pulsante di accettazione
+            acceptButton.addEventListener('click', function() {
+                if (acceptCheckbox.checked) {
+                    // Crea il cookie con scadenza di 365 giorni
+                    const expirationDate = new Date();
+                    expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+                    
+                    document.cookie = `synapsehubTOSAccepted=true; expires=${expirationDate.toUTCString()}; path=/`;
+                    
+                    // Mostra messaggio di conferma
+                    messageDiv.textContent = 'Grazie per aver accettato i Termini di Servizio di SynapseHub!';
+                    messageDiv.className = 'message success';
+                    messageDiv.style.display = 'block';
+                    
+                    // Disabilita il pulsante dopo l'accettazione
+                    acceptButton.disabled = true;
+                    acceptButton.textContent = 'Termini Accettati';
+                    acceptCheckbox.disabled = true;
+                    
+                    // Scrolla verso il messaggio di conferma
+                    messageDiv.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+            
+            function checkTOSAccepted() {
+                const cookies = document.cookie.split(';');
+                for (let cookie of cookies) {
+                    cookie = cookie.trim();
+                    if (cookie.startsWith('synapsehubTOSAccepted=')) {
+                        messageDiv.textContent = 'Hai già accettato i Termini di Servizio di SynapseHub.';
+                        messageDiv.className = 'message success';
+                        messageDiv.style.display = 'block';
+                        
+                        acceptButton.disabled = true;
+                        acceptButton.textContent = 'Termini Accettati';
+                        acceptCheckbox.checked = true;
+                        acceptCheckbox.disabled = true;
+                        break;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
